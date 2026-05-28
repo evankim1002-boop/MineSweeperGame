@@ -1,0 +1,28 @@
+public class Tile{
+
+    private int Bomb;
+    private int isFlag;
+    private int bombCount;
+
+    public Tile() {
+        Bomb = (int) Math.random() + 1;
+        isFlag = 0;
+
+    }
+
+    public int getBomb() {
+        if (Bomb == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int getFlag() {
+        if (isFlag == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
