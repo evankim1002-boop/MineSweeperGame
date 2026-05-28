@@ -24,6 +24,21 @@ public class Board {
         }
     }
 
+    public int getBombCount(){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (tileBoard[i][j].getBomb() == 1) {
+                    bombCount++;
+                }
+            }
+        }
+        return bombCount;
+    }
+
+    public Tile getTile(int r, int c) {
+        return tileBoard[r][c];
+    }
+
     public int getFlagCount() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {

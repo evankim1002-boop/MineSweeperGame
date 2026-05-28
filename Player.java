@@ -1,4 +1,4 @@
-import java.util.Timer;
+;
 
 public class Player {
     private String name;
@@ -20,18 +20,34 @@ public class Player {
     }
 
     public int getScore() {
-        return score;
+        return calculateScore(Time);
     }
 
     public int getHighScore() {
-        return highScore;
+        return highScore(getScore());
     }
 
     public int getTime() {
-        
+        return (int) (System.currentTimeMillis()/1000);
     }
 
     public int getGamesPlayed() {
         return gamesPlayed;
     }
+
+    public int calculateScore(int time){
+        score = 1000 - time;
+        return score;
+    }
+
+    public int highScore(int score){
+        if (score > highScore) {
+            highScore = score;
+        }
+        return highScore;
+    } 
+
+
+
+
 }

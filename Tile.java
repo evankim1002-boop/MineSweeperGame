@@ -25,4 +25,8 @@ public class Tile{
             return 0;
         }
     }
+
+    public void setFlag(int flag) {
+        this.isFlag = flag;
+    }
 }
