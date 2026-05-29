@@ -14,6 +14,7 @@ public class Game {
     }
 
     public int checkWin(Board board){
+        //fix 
         int bombCount = board.getBombCount();
         int flagCount = board.getFlagCount();
         if (bombCount == flagCount) {
@@ -69,7 +70,12 @@ public class Game {
     }
 
     public void checkTile(int r, int c){
-        System.out.println();
+        if (board.getTile(r,c).getBomb() == 1)
+            board.getTile(r,c).setRevealState(1);
+            endRound();
+        else{
+            System.out.println(board.getTile(r,c).getBombCount())
+        }
     }
 
     public void removeFlag(int r, int c){
