@@ -14,22 +14,10 @@ public class Game {
     }
 
     public int checkWin(Board board){
-        //fix 
-        int bombCount = board.getBombCount();
-        int flagCount = board.getFlagCount();
-        if (bombCount == flagCount) {
-            return 1;
-        }
-        return 0;
     }
 
     public void endRound(){
-        if(/*some condition for lose*/){
-            System.out.println("Game Over");
-        }
-        else if (/* some condition for win */){
-            System.out.println(getHighScore());
-        }
+        
     }
 
     public int getRow(){
