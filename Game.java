@@ -17,7 +17,7 @@ public class Game {
     }
 
     public void endRound(){
-        
+        System.out.println("Game Over");
     }
 
     public int getRow(){
@@ -58,11 +58,12 @@ public class Game {
     }
 
     public void checkTile(int r, int c){
-        if (board.getTile(r,c).getBomb() == 1)
+        if (board.getTile(r,c).getBomb() == 1){
             board.getTile(r,c).setRevealState(1);
             endRound();
-        else{
-            System.out.println(board.getTile(r,c).getBombCount())
+        }
+        else {
+            System.out.println(board.getTile(r,c).getBombCount());
         }
     }
 
