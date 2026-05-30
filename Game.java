@@ -43,7 +43,7 @@ public class Game {
             System.out.println("Error. input valid number");
             row = scanner.nextInt();
             scanner.nextLine();
-            if(row >= 9 && row <= 9){
+            if(row >= 0 && row <= 9){
                 validRow = false;
             }
         }
@@ -63,7 +63,7 @@ public class Game {
             System.out.println("Error. input valid number");
             row = scanner.nextInt();
             scanner.nextLine();
-            if(row >= 9 && row <= 9){
+            if(row >= 0 && row <= 9){
                 validColumn = false;
             }
         }
