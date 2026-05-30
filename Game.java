@@ -35,14 +35,23 @@ public class Game {
         System.out.println("Enter row: ");
         int row = scanner.nextInt();
         scanner.nextLine();
+        while(0>row || row < 9){
+            System.out.println("Error. input valid number");
+            getRow();
+            
+        }
         return row;
-        
     }
 
     public int getColumn(){
         System.out.println("Enter column: ");
         int column = scanner.nextInt();
         scanner.nextLine();
+        while(0>column || column < 9){
+            System.out.println("Error. input valid number");
+            getRow();
+            
+        }
         return column;
     }
 
@@ -113,7 +122,7 @@ public class Game {
     public void printDebug(){
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                if(board.getTile(i,j).getFlag() == 0){
+                if(board.getTile(i,j).getBomb() == 0){
                         System.out.print(board.getNeighborCount(i, j) + " ");
                 }
                 else{
