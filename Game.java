@@ -140,7 +140,7 @@ public class Game {
                         System.out.print(board.getNeighborCount(i, j) + " ");
                 }
                 else{
-                        System.out.print("B");
+                        System.out.print("B ");
                     }
                 
                 }

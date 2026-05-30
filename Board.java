@@ -99,7 +99,7 @@ public class Board {
                         System.out.print("? ");
                     }
                     else{
-                        System.out.print("Flag ");
+                        System.out.print("F ");
                     }
                 }
                 else if(getTile(i,j).getRevealState()== 1){
