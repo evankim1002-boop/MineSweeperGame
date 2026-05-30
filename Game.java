@@ -1,6 +1,8 @@
+
 import java.util.Scanner;
 
 public class Game {
+
     private int totalGame;
     private int highScore;
     private String input;
@@ -8,14 +10,14 @@ public class Game {
     private Board board;
     private int gameOver;
 
-    public Game(){
+    public Game() {
         this.totalGame = 0;
         this.scanner = new Scanner(System.in);
         this.board = new Board();
         this.gameOver = 0;
     }
 
-    public int checkWin(Board board){
+    public int checkWin(Board board) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (board.getTile(i, j).getBomb() == 0 && board.getTile(i, j).getRevealState() == 0) {
@@ -26,138 +28,159 @@ public class Game {
         return 1;
     }
 
-    public void endRound(){
+    public void endRound() {
         System.out.println("Game Over");
         gameOver = 1;
     }
 
-    public int getRow(){
+    public int getRow() {
         boolean validRow = true;
-        System.out.println("Enter row: ");
-        int row = scanner.nextInt();
-        while (!scanner.hasNextInt()) {
-      System.out.println("Error. input valid number");
-      scanner.nextLine();   // discard bad token
-        }
-        row = scanner.nextInt();
-        scanner.nextLine();
-        if(row >= 0 && row <= 9){
-            validRow = false;
-        }
-        scanner.nextLine();
-        while(validRow){
-            System.out.println("Error. input valid number");
-            row = scanner.nextInt();
-            scanner.nextLine();
-            if(row >= 0 && row <= 9){
-                validRow = false;
+        int row = -1;
+        // System.out.println("Enter row: ");
+        // int row = scanner.nextInt();
+        // row = scanner.nextInt();
+        // scanner.nextLine();
+
+        // while(validRow){
+        //     if (!scanner.hasNextInt()){
+        //         System.out.println("Error. input valid number");
+        //     }
+        //     row = scanner.nextInt();
+        //     scanner.next();
+        //     if(row >= 0 && row <= 9){
+        //         validRow = false;
+        //     }
+        // }
+        // return row;
+        while (true) {
+            System.out.print("Enter row: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Error. Enter a valid number.");
+                scanner.next(); // remove invalid token
+            } else {
+                row = scanner.nextInt();
+
+                if (row >= 0 && row <= 9) {
+                    break;
+                }
+
+                System.out.println("Row must be between 0 and 9.");
             }
         }
         return row;
     }
-        
 
-    public int getColumn(){
+    public int getColumn() {
         boolean validColumn = true;
-        System.out.println("Enter column: ");
-        while (!scanner.hasNextInt()) {
-        System.out.println("Error. input valid number");
-        scanner.nextLine();   // discard bad token
-        }
-        int column = scanner.nextInt();
-        scanner.nextLine();
-        if(column >= 0 && column <= 9){
-            validColumn = false;
-        }
-        scanner.nextLine();
-        while(validColumn){
-            System.out.println("Error. input valid number");
-            column = scanner.nextInt();
-            scanner.nextLine();
-            if(column >= 0 && column <= 9){
-                validColumn = false;
+        int column = -1;
+        // System.out.println("Enter column: ");
+        // while (!scanner.hasNextInt()) {
+        // System.out.println("Error. input valid number");
+        // }
+        // int column = scanner.nextInt();
+        // if(column > 0 || column < 9){
+        //     validColumn = false;
+        // }
+        // while (validColumn && !scanner.hasNextInt()) {
+        //     System.out.println("Error. input valid number");
+        //     column = scanner.nextInt();
+        //     scanner.next();
+        //     if (column >= 0 && column <= 9) {
+        //         validColumn = false;
+        //     }
+        // }
+        // return column;
+        while (true) {
+            System.out.print("Enter column: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Error. Enter a valid number.");
+                scanner.next(); // remove invalid token
+            } else {
+                column = scanner.nextInt();
+
+                if (column >= 0 && column <= 9) {
+                    break;
+                }
+
+                System.out.println("Column must be between 0 and 9.");
             }
         }
         return column;
     }
-    public void playerChoice(){
+
+    public void playerChoice() {
         board.printDisplay();
         System.out.println("Enter flag, check, or remove: ");
         String input = scanner.nextLine();
-        if (input.equals("flag")){
+        if (input.equals("flag")) {
             int row = getRow();
             int column = getColumn();
             placeFlag(row, column);
-            
-        }
-        else if (input.equals("check"))
-        {
+
+        } else if (input.equals("check")) {
             int row = getRow();
             int column = getColumn();
             checkTile(row, column);
-        }
-        else if (input.equals("remove")){
+        } else if (input.equals("remove")) {
             int row = getRow();
             int column = getColumn();
             removeFlag(row, column);
         }
     }
 
-    public void placeFlag(int r, int c){
-        if (board.getTile(r, c).getFlag() == 0){
+    public void placeFlag(int r, int c) {
+        if (board.getTile(r, c).getFlag() == 0) {
             board.getTile(r, c).setFlag(1);
             System.out.println("Flag Placed Sucessfully");
-        }
-        else if (board.getTile(r, c).getFlag() == 1){
+        } else if (board.getTile(r, c).getFlag() == 1) {
             System.out.println("Flag Already Present");
             playerChoice();
         }
     }
 
-    public void checkTile(int r, int c){
-        if (board.getTile(r,c).getBomb() == 1){
-            board.getTile(r,c).setRevealState(1);
+    public void checkTile(int r, int c) {
+        if (board.getTile(r, c).getBomb() == 1) {
+            board.getTile(r, c).setRevealState(1);
             endRound();
-        }
-        else {
+        } else {
             board.revealEmptyTiles(r, c);
             System.out.println(board.getNeighborCount(r, c));
         }
     }
 
-    public void removeFlag(int r, int c){
-        if (board.getTile(r, c).getFlag() == 1){
+    public void removeFlag(int r, int c) {
+        if (board.getTile(r, c).getFlag() == 1) {
             board.getTile(r, c).setFlag(0);
             System.out.println("Flag Removed Sucessfully");
-        }
-        else if (board.getTile(r, c).getFlag() == 0){
+        } else if (board.getTile(r, c).getFlag() == 0) {
             System.out.println("No Flag Present");
             playerChoice();
         }
     }
 
-    public Board getBoard(){
+    public Board getBoard() {
         return board;
     }
 
-    public int getGameOver(){
+    public int getGameOver() {
         return gameOver;
     }
 
-    public void printDebug(){
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 10; j++){
-                if(board.getTile(i,j).getBomb() == 0){
-                        System.out.print(board.getNeighborCount(i, j) + " ");
+    public void printDebug() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (board.getTile(i, j).getBomb() == 0) {
+                    System.out.print(board.getNeighborCount(i, j) + " ");
+                } else {
+                    System.out.print("B ");
                 }
-                else{
-                        System.out.print("B ");
-                    }
-                
-                }
+
+            }
             System.out.println();
         }
-            
+
     }
-    
+
 }
