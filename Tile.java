@@ -6,8 +6,9 @@ public class Tile{
     private int revealState;
 
     public Tile() {
-        Bomb = (int) (Math.random() + 1);
+        Bomb = Math.random() < 0.15 ? 1 : 0;
         isFlag = 0;
+        revealState = 0;
 
     }
 

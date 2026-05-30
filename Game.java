@@ -6,18 +6,29 @@ public class Game {
     private String input;
     private Scanner scanner;
     private Board board;
+    private int gameOver;
 
     public Game(){
         this.totalGame = 0;
         this.scanner = new Scanner(System.in);
         this.board = new Board();
+        this.gameOver = 0;
     }
 
     public int checkWin(Board board){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (board.getTile(i, j).getBomb() == 0 && board.getTile(i, j).getRevealState() == 0) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
     }
 
     public void endRound(){
         System.out.println("Game Over");
+        gameOver = 1;
     }
 
     public int getRow(){
@@ -28,10 +39,14 @@ public class Game {
 
     public int getColumn(){
         System.out.println("Enter column: ");
-        return scanner.nextInt();
+        int column = scanner.nextInt();
+        scanner.nextLine();
+        return column;
     }
 
     public void playerChoice(){
+        board.printDisplay();
+        System.out.println("Enter flag, check, or remove: ");
         String input = scanner.nextLine();
         if (input.equals("flag")){
             placeFlag(getRow(), getColumn());
@@ -63,7 +78,8 @@ public class Game {
             endRound();
         }
         else {
-            System.out.println(board.getTile(r,c).getBombCount());
+            board.revealEmptyTiles(r, c);
+            System.out.println(board.getNeighborCount(r, c));
         }
     }
 
@@ -76,6 +92,14 @@ public class Game {
             System.out.println("No Flag Present");
             playerChoice();
         }
+    }
+
+    public Board getBoard(){
+        return board;
+    }
+
+    public int getGameOver(){
+        return gameOver;
     }
     
 }

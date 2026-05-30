@@ -9,8 +9,8 @@ public class Board {
 
     public Board() {
         flagCount = 0;
-        generateBoard();
         this.bombCount = 0;
+        generateBoard();
     }
 
     public void generateBoard(){
@@ -39,14 +39,38 @@ public class Board {
     }
 
     public int getNeighborCount(int r, int c){
-        Tile tile = getTile(r, c);
         int count = 0;
-        if(r == 0 && c == 0){
-            if(getTile(r+1,c).getBomb()==1){
-                count++;
+        for (int i = r - 1; i <= r + 1; i++) {
+            for (int j = c - 1; j <= c + 1; j++) {
+                if (i >= 0 && i < 10 && j >= 0 && j < 10 && !(i == r && j == c)) {
+                    if(getTile(i, j).getBomb()==1){
+                        count++;
+                    }
+                }
             }
-            else if(getTile(r, c+1).getBomb()==1){
+        }
+        return count;
+    }
 
+    public void revealEmptyTiles(int r, int c){
+        if (r < 0 || r >= 10 || c < 0 || c >= 10) {
+            return;
+        }
+        if (getTile(r, c).getRevealState() == 1 || getTile(r, c).getFlag() == 1 || getTile(r, c).getBomb() == 1) {
+            return;
+        }
+
+        getTile(r, c).setRevealState(1);
+
+        if (getNeighborCount(r, c) != 0) {
+            return;
+        }
+
+        for (int i = r - 1; i <= r + 1; i++) {
+            for (int j = c - 1; j <= c + 1; j++) {
+                if (!(i == r && j == c)) {
+                    revealEmptyTiles(i, j);
+                }
             }
         }
     }
@@ -56,6 +80,7 @@ public class Board {
     }
 
     public int getFlagCount() {
+        flagCount = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (tileBoard[i][j].getFlag() == 1) {
@@ -71,14 +96,14 @@ public class Board {
             for (int j = 0; j < 10; j++){
                 if (getTile(i,j).getRevealState() == 0){
                     if(getTile(i,j).getFlag() == 0){
-                        System.out.println("?");
+                        System.out.print("? ");
                     }
                     else{
-                        System.out.println("Flag");
+                        System.out.print("Flag ");
                     }
                 }
-                else if(getTile(i,j).getRevealState()== 0){
-                    System.out.println(getNeighborCount(i, j));
+                else if(getTile(i,j).getRevealState()== 1){
+                    System.out.print(getNeighborCount(i, j) + " ");
                 }
             }
             System.out.println();
