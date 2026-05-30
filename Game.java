@@ -35,6 +35,12 @@ public class Game {
         boolean validRow = true;
         System.out.println("Enter row: ");
         int row = scanner.nextInt();
+        while (!scanner.hasNextInt()) {
+      System.out.println("Error. input valid number");
+      scanner.nextLine();   // discard bad token
+        }
+        row = scanner.nextInt();
+        scanner.nextLine();
         if(row >= 0 && row <= 9){
             validRow = false;
         }
@@ -53,21 +59,26 @@ public class Game {
 
     public int getColumn(){
         boolean validColumn = true;
-        System.out.println("Enter row: ");
-        int row = scanner.nextInt();
-        if(row >= 0 && row <= 9){
+        System.out.println("Enter column: ");
+        while (!scanner.hasNextInt()) {
+        System.out.println("Error. input valid number");
+        scanner.nextLine();   // discard bad token
+        }
+        int column = scanner.nextInt();
+        scanner.nextLine();
+        if(column >= 0 && column <= 9){
             validColumn = false;
         }
         scanner.nextLine();
         while(validColumn){
             System.out.println("Error. input valid number");
-            row = scanner.nextInt();
+            column = scanner.nextInt();
             scanner.nextLine();
-            if(row >= 0 && row <= 9){
+            if(column >= 0 && column <= 9){
                 validColumn = false;
             }
         }
-        return row;
+        return column;
     }
     public void playerChoice(){
         board.printDisplay();
