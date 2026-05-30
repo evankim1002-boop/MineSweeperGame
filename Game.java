@@ -35,7 +35,7 @@ public class Game {
         System.out.println("Enter row: ");
         int row = scanner.nextInt();
         scanner.nextLine();
-        while(0>row || row < 9){
+        while(0>row || row > 9){
             System.out.println("Error. input valid number");
             getRow();
             
