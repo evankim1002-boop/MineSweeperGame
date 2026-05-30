@@ -47,7 +47,7 @@ public class Game {
         System.out.println("Enter column: ");
         int column = scanner.nextInt();
         scanner.nextLine();
-        while(0>column || column < 9){
+        while(0>column || column > 9){
             System.out.println("Error. input valid number");
             getRow();
             
