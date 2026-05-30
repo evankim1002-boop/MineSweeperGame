@@ -33,7 +33,9 @@ public class Game {
 
     public int getRow(){
         System.out.println("Enter row: ");
-        return scanner.nextInt();
+        int row = scanner.nextInt();
+        scanner.nextLine();
+        return row;
         
     }
 
@@ -49,15 +51,21 @@ public class Game {
         System.out.println("Enter flag, check, or remove: ");
         String input = scanner.nextLine();
         if (input.equals("flag")){
-            placeFlag(getRow(), getColumn());
+            int row = getRow();
+            int column = getColumn();
+            placeFlag(row, column);
             
         }
         else if (input.equals("check"))
         {
-            checkTile(getRow(), getColumn());
+            int row = getRow();
+            int column = getColumn();
+            checkTile(row, column);
         }
         else if (input.equals("remove")){
-            removeFlag(getRow(), getColumn());
+            int row = getRow();
+            int column = getColumn();
+            removeFlag(row, column);
         }
     }
 
