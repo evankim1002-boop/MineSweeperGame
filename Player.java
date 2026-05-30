@@ -4,6 +4,7 @@ public class Player {
     private int highScore;
     private int Time;
     private int gamesPlayed;
+    private int startTime;
 
     public Player(String name) {
         this.name = name;
@@ -11,6 +12,8 @@ public class Player {
         this.highScore = 0;
         this.Time = 0;
         this.gamesPlayed = 0;
+        this.startTime = (int) (System.currentTimeMillis()/1000);
+
     }
 
     public String getName() {
@@ -26,7 +29,7 @@ public class Player {
     }
 
     public int getTime() {
-        return (int) (System.currentTimeMillis()/1000);
+        return (int) ((System.currentTimeMillis()-startTime)/1000);
     }
 
     public int getGamesPlayed() {
