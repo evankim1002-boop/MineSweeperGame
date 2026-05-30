@@ -109,5 +109,15 @@ public class Game {
     public int getGameOver(){
         return gameOver;
     }
+
+    public void printDebug(){
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                System.out.print(board.getNeighborCount(i, j) + " ");
+                }
+            System.out.println();
+        }
+            
+    }
     
 }
