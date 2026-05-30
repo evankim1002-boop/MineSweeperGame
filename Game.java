@@ -113,7 +113,13 @@ public class Game {
     public void printDebug(){
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                System.out.print(board.getNeighborCount(i, j) + " ");
+                if(board.getTile(i,j).getFlag() == 0){
+                        System.out.print(board.getNeighborCount(i, j) + " ");
+                }
+                else{
+                        System.out.print("B");
+                    }
+                
                 }
             System.out.println();
         }
