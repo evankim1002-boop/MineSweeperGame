@@ -32,29 +32,43 @@ public class Game {
     }
 
     public int getRow(){
+        boolean validRow = true;
         System.out.println("Enter row: ");
         int row = scanner.nextInt();
+        if(row >= 0 && row <= 9){
+            validRow = false;
+        }
         scanner.nextLine();
-        while(0>row || row > 9){
+        while(validRow){
             System.out.println("Error. input valid number");
-            getRow();
-            
+            row = scanner.nextInt();
+            scanner.nextLine();
+            if(row >= 9 && row <= 9){
+                validRow = false;
+            }
         }
         return row;
     }
+        
 
     public int getColumn(){
-        System.out.println("Enter column: ");
-        int column = scanner.nextInt();
-        scanner.nextLine();
-        while(0>column || column > 9){
-            System.out.println("Error. input valid number");
-            getRow();
-            
+        boolean validColumn = true;
+        System.out.println("Enter row: ");
+        int row = scanner.nextInt();
+        if(row >= 0 && row <= 9){
+            validColumn = false;
         }
-        return column;
+        scanner.nextLine();
+        while(validColumn){
+            System.out.println("Error. input valid number");
+            row = scanner.nextInt();
+            scanner.nextLine();
+            if(row >= 9 && row <= 9){
+                validColumn = false;
+            }
+        }
+        return row;
     }
-
     public void playerChoice(){
         board.printDisplay();
         System.out.println("Enter flag, check, or remove: ");
